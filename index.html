@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Dân Số – Xuân Hương, Đà Lạt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --rose: #FF6F91;
+            --rose-deep: #E6486C;
+            --rose-soft: #FFB6C9;
+            --blossom: #FFE3EC;
+            --gold: #E8B84B;
+            --gold-deep: #B9852A;
+            --sky: #EAF4FB;
+            --cream: #FFFBF6;
+            --ink: #3A2233;
+            --plum: #6B4A5F;
+            --line: #F3D3DE;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(900px 420px at 10% -8%, rgba(255, 111, 145, .16), transparent 60%),
+                radial-gradient(800px 380px at 100% 0%, rgba(232, 184, 75, .14), transparent 55%),
+                #FBE9EE;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* ---------- Lightfall animated background ---------- */
+        #lightfall-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        #lightfall-bg canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* ---------- falling petals ---------- */
+        #petals {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 60;
+        }
+
+        .petal {
+            position: absolute;
+            top: -6vh;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: 1;
+            filter: drop-shadow(0 3px 4px rgba(230, 72, 108, .22));
+            will-change: transform, opacity;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 1;
+            }
+
+            50% {
+                transform: translate(var(--sway), 55vh) rotate(calc(var(--rot) * .6));
+            }
+
+            92% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(calc(var(--sway) * -.45), 112vh) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
+
+        /* ---------- entrance ---------- */
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .rise {
+            animation: riseIn .8s cubic-bezier(.22, .9, .28, 1) both;
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 50px 20px 0;
+        }
+
+        /* ---------- hero band ---------- */
+        .hero-band {
+            position: relative;
+            border-radius: 26px;
+            text-align: center;
+            border: 1px solid var(--line);
+            box-shadow: 0 30px 60px -32px rgba(230, 72, 108, .35);
+            overflow: hidden;
+            animation-delay: .05s;
+        }
+
+        /* ---------- hero banner image (now fills the whole band; text sits on top) ---------- */
+        .hero-banner-frame {
+            position: relative;
+            width: 100%;
+            min-height: 480px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 640px) {
+            .hero-banner-frame {
+                min-height: 580px;
+            }
+        }
+
+        .hero-banner {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            filter: saturate(1.05) contrast(1.02);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(180deg, rgba(38, 10, 22, .68) 0%, rgba(38, 10, 22, .32) 40%, rgba(38, 10, 22, .78) 100%),
+                radial-gradient(120% 90% at 50% 0%, rgba(255, 111, 145, .2), transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-band::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+        }
+
+        .eyebrow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .eyebrow-row .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #FFE3EC;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+        }
+
+        .hero-band h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: clamp(32px, 6vw, 50px);
+            line-height: 1.05;
+            margin: 0 0 6px;
+            color: #fff;
+            text-shadow: 0 6px 28px rgba(0, 0, 0, .45), 0 1px 4px rgba(0, 0, 0, .35);
+            position: relative;
+        }
+
+        .hero-band h1 em {
+            font-style: italic;
+            font-weight: 700;
+            background: linear-gradient(120deg, #FFD9E4, #F5C868);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-band .place {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: clamp(15px, 2.2vw, 18px);
+            color: #FFE9C7;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+            margin: 0 0 16px;
+        }
+
+        .hero-band p.desc {
+            max-width: 520px;
+            margin: 0 auto;
+            font-size: 13.8px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, .88);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
+            position: relative;
+        }
+
+        .seal-row {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .seal-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 11.5px;
+            color: #fff;
+            font-weight: 700;
+            background: rgba(255, 255, 255, .14);
+            border: 1px solid rgba(255, 255, 255, .38);
+            padding: 6px 12px;
+            border-radius: 999px;
+            backdrop-filter: blur(10px) saturate(140%);
+            -webkit-backdrop-filter: blur(10px) saturate(140%);
+        }
+
+        .seal-item svg {
+            width: 14px;
+            height: 14px;
+            flex: none;
+        }
+
+        /* ---------- cards ---------- */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+            max-width: 760px;
+            margin: 40px auto 0;
+        }
+
+        @media (min-width:680px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+
+        .card {
+            position: relative;
+            border-radius: 22px;
+            padding: 3px 0 26px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(58, 34, 51, .04), 0 22px 44px -28px rgba(230, 72, 108, .45);
+            transition: transform .25s ease, box-shadow .25s ease;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1px 2px rgba(58, 34, 51, .05), 0 30px 54px -26px rgba(230, 72, 108, .55);
+        }
+
+        /* rotating gradient ring: an oversized conic-gradient square spins behind
+           the card, and ::after masks everything but a thin border-width ring */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 240%;
+            height: 240%;
+            background: conic-gradient(from 0deg,
+                    var(--rose) 0deg,
+                    var(--gold) 90deg,
+                    var(--rose-deep) 180deg,
+                    var(--rose-soft) 270deg,
+                    var(--rose) 360deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: card-border-spin 6s linear infinite;
+            z-index: 0;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 2.5px;
+            border-radius: 19px;
+            background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%);
+            z-index: 1;
+        }
+
+        .card>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes card-border-spin {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .platform-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin: 22px 0 18px;
+            color: #fff;
+            background: linear-gradient(120deg, var(--rose), var(--rose-deep));
+            box-shadow: 0 6px 14px -6px rgba(230, 72, 108, .55);
+        }
+
+        .qr-frame {
+            position: relative;
+            width: 172px;
+            height: 172px;
+            margin: 0 auto 18px;
+            padding: 12px;
+            background: #fff;
+            border-radius: 18px;
+            cursor: pointer;
+            border: 1px solid var(--line);
+        }
+
+        .qr-frame img,
+        .qr-frame canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .qr-frame .bracket {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid var(--rose-deep);
+        }
+
+        .qr-frame .bracket.tl {
+            top: 6px;
+            left: 6px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 8px 0 0 0;
+        }
+
+        .qr-frame .bracket.tr {
+            top: 6px;
+            right: 6px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 8px 0 0;
+        }
+
+        .qr-frame .bracket.bl {
+            bottom: 6px;
+            left: 6px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 8px;
+        }
+
+        .qr-frame .bracket.br {
+            bottom: 6px;
+            right: 6px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 8px 0;
+        }
+
+        .app-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--ink);
+            margin: 0 0 4px;
+        }
+
+        .scan-hint {
+            font-size: 12px;
+            color: var(--plum);
+            margin: 0 0 20px;
+        }
+
+        /* ---------- store badges (App Store / Google Play) ---------- */
+        .store-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: calc(100% - 52px);
+            margin: 0 auto;
+            padding: 10px 18px;
+            border-radius: 14px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #121218 0%, #252530 40%, #3e3e4f 50%, #252530 60%, #121218 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Sword-like periodic flash sheen style (every 5 seconds) */
+        .store-badge .sheen {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 80%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.7) 45%,
+                    rgba(255, 255, 255, 0.95) 50%,
+                    rgba(255, 255, 255, 0.7) 55%,
+                    transparent 100%);
+            transform: skewX(-30deg);
+            z-index: 3;
+            pointer-events: none;
+            animation: sword-flash 5s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes sword-flash {
+            0% {
+                left: -150%;
+            }
+
+            40% {
+                left: 150%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        /* Hover states */
+        .store-badge:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: linear-gradient(135deg, #181822 0%, #2c2c3a 40%, #4f4f65 50%, #2c2c3a 60%, #181822 100%);
+            border-color: rgba(255, 111, 145, 0.35);
+        }
+
+        /* Glow shadows on hover matching platform style */
+        .card:nth-of-type(1) .store-badge:hover {
+            box-shadow: 0 10px 25px rgba(230, 72, 108, 0.45);
+        }
+
+        .card:nth-of-type(2) .store-badge:hover {
+            box-shadow: 0 10px 25px rgba(232, 184, 75, 0.35);
+        }
+
+        /* Squeeze state on click */
+        .store-badge:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .store-badge-icon {
+            width: 27px;
+            height: 27px;
+            flex: none;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Playful icon zoom and twist on hover */
+        .store-badge:hover .store-badge-icon {
+            transform: scale(1.15) rotate(6deg);
+        }
+
+        .store-badge-icon.apple {
+            color: #fff;
+        }
+
+        .store-badge-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        .store-badge-text em {
+            font-style: normal;
+            font-size: 9.5px;
+            font-weight: 500;
+            letter-spacing: .04em;
+            color: rgba(255, 255, 255, .72);
+        }
+
+        .store-badge-text b {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ---------- footer ---------- */
+        .footnote {
+            max-width: 600px;
+            margin: 36px auto 0;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--plum);
+            padding: 0 12px;
+        }
+
+        .footnote b {
+            color: var(--rose-deep);
+        }
+
+        .sakura-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 34px 0 8px;
+        }
+
+        .sakura-divider .ln {
+            width: 70px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--rose-soft));
+        }
+
+        .sakura-divider .ln.r {
+            background: linear-gradient(90deg, var(--rose-soft), transparent);
+        }
+
+        .sakura-divider span.cap {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--rose-deep);
+        }
+
+        .bottom-pad {
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- animated WebGL background (renders behind all content) -->
+    <div id="lightfall-bg"></div>
+
+    <div id="petals"></div>
+
+    <div class="wrap">
+
+        <div class="hero-band rise">
+            <div class="hero-banner-frame">
+                <img src="hero.png" class="hero-banner" alt="Xuân Hương, Đà Lạt">
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+                    <div class="eyebrow-row">
+                        <span class="dot"></span>
+                        <span class="eyebrow">Ủy ban nhân dân phường Xuân Hương</span>
+                        <span class="dot"></span>
+                    </div>
+                    <h1>Công Dân <em>Số</em></h1>
+                    <p class="place">Xuân Hương · Đà Lạt</p>
+                    <p class="desc">Ứng dụng kết nối chính quyền và người dân phường Xuân Hương — tra cứu thủ tục, phản
+                        ánh hiện trường và cập nhật thông tin địa phương ngay trên điện thoại.</p>
+
+                    <div class="seal-row">
+                        <div class="seal-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2l2.4 4.9L20 8l-4 3.9.9 5.4L12 14.8 7.1 17.3 8 11.9 4 8l5.6-1.1L12 2z"
+                                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                            </svg>
+                            Miễn phí tải &amp; sử dụng
+                        </div>
+                        <div class="seal-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3l7 3v5c0 4.6-3 8.7-7 10-4-1.3-7-5.4-7-10V6l7-3z" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linejoin="round" />
+                            </svg>
+                            Xác thực định danh điện tử
+                        </div>
+                        <div class="seal-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                                <path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Cập nhật thời gian thực
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards">
+
+            <!-- App Store -->
+            <div class="card rise" style="animation-delay:.15s">
+                <span class="platform-tag">
+
+                    iOS · App Store
+                </span>
+                <a href="https://apps.apple.com/vn/app/công-dân-số-xuân-hương-đà-lạt/id1623774708?l=vi" target="_blank"
+                    rel="noopener" aria-label="Mở App Store">
+                    <div class="qr-frame" id="qr-ios">
+                        <span class="bracket tl"></span><span class="bracket tr"></span>
+                        <span class="bracket bl"></span><span class="bracket br"></span>
+                    </div>
+                </a>
+                <p class="app-name">Công Dân Số Xuân Hương</p>
+                <p class="scan-hint">Quét mã hoặc nhấn nút bên dưới</p>
+
+                <a class="store-badge"
+                    href="https://apps.apple.com/vn/app/công-dân-số-xuân-hương-đà-lạt/id1623774708?l=vi" target="_blank"
+                    rel="noopener" aria-label="Tải trên App Store">
+                    <span class="sheen"></span>
+                    <img class="store-badge-icon" src="https://img.icons8.com/fluency/48/apple-app-store.png"
+                        alt="Apple App Store">
+                    <span class="store-badge-text">
+                        <em>Tải trên</em>
+                        <b>App Store</b>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Google Play -->
+            <div class="card rise" style="animation-delay:.25s">
+                <span class="platform-tag">
+
+                    Android · CH Play
+                </span>
+                <a href="https://play.google.com/store/apps/details?id=vn.vnpt.xuanhuongtructuyen&hl=vi" target="_blank"
+                    rel="noopener" aria-label="Mở CH Play">
+                    <div class="qr-frame" id="qr-android">
+                        <span class="bracket tl"></span><span class="bracket tr"></span>
+                        <span class="bracket bl"></span><span class="bracket br"></span>
+                    </div>
+                </a>
+                <p class="app-name">Công Dân Số Xuân Hương</p>
+                <p class="scan-hint">Quét mã hoặc nhấn nút bên dưới</p>
+
+                <a class="store-badge"
+                    href="https://play.google.com/store/apps/details?id=vn.vnpt.xuanhuongtructuyen&hl=vi"
+                    target="_blank" rel="noopener" aria-label="Tải trên Google Play">
+                    <span class="sheen"></span>
+                    <img class="store-badge-icon" src="https://img.icons8.com/fluency/48/google-play.png"
+                        alt="Google Play">
+                    <span class="store-badge-text">
+                        <em>Tải trên</em>
+                        <b>Google Play</b>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+
+        <p class="footnote rise" style="animation-delay:.35s"></p>
+
+        <div class="sakura-divider">
+            <span class="ln"></span>
+            <span class="cap"></span>
+            <span class="ln r"></span>
+        </div>
+        <div class="bottom-pad"></div>
+
+    </div>
+
+    <script>
+        /* ---------- QR codes ---------- */
+        /* encodeURI() converts the Vietnamese diacritics in the URL into plain
+           ASCII percent-escapes before handing the string to qrcode.min.js.
+           That library has a known bug where multi-byte UTF-8 characters break
+           its capacity calculation and the QR silently fails to render — the
+           surrounding <a href> still worked because it doesn't depend on this
+           script, which is why the buttons opened the right page even though
+           no QR image ever appeared. */
+        new QRCode(document.getElementById("qr-ios"), {
+            text: encodeURI("https://apps.apple.com/vn/app/công-dân-số-xuân-hương-đà-lạt/id1623774708?l=vi"),
+            width: 148, height: 148,
+            colorDark: "#3A2233", colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+        });
+        new QRCode(document.getElementById("qr-android"), {
+            text: encodeURI("https://play.google.com/store/apps/details?id=vn.vnpt.xuanhuongtructuyen&hl=vi"),
+            width: 148, height: 148,
+            colorDark: "#3A2233", colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        /* ---------- falling sakura petals ---------- */
+        const petalColors = ['#FF6F91', '#FFB6C9', '#E6486C', '#FFD9E4'];
+        const petalHost = document.getElementById('petals');
+        const PETAL_PATH = 'M16 2C10 2 6 8 6 15c0 6.5 4.2 12 10 17 5.8-5 10-10.5 10-17 0-7-4-13-10-13z';
+
+        function spawnPetal() {
+            const svgNS = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(svgNS, 'svg');
+            svg.setAttribute('viewBox', '0 0 32 34');
+            svg.classList.add('petal');
+
+            const size = 10 + Math.random() * 16;
+            const duration = 9 + Math.random() * 8;
+            const sway = (Math.random() * 160 - 80);
+            const rot = (Math.random() * 360 - 180);
+
+            svg.style.width = size + 'px';
+            svg.style.height = size + 'px';
+            svg.style.left = (Math.random() * 100) + 'vw';
+            svg.style.animationDuration = duration + 's';
+            svg.style.setProperty('--sway', sway + 'px');
+            svg.style.setProperty('--rot', rot + 'deg');
+
+            const path = document.createElementNS(svgNS, 'path');
+            path.setAttribute('d', PETAL_PATH);
+            path.setAttribute('fill', petalColors[Math.floor(Math.random() * petalColors.length)]);
+            svg.appendChild(path);
+
+            petalHost.appendChild(svg);
+            setTimeout(() => svg.remove(), duration * 1000 + 300);
+        }
+
+        // seed initial batch at staggered times, then keep a gentle stream going
+        for (let i = 0; i < 14; i++) {
+            setTimeout(spawnPetal, i * 350);
+        }
+        setInterval(spawnPetal, 550);
+    </script>
+
+    <!-- ================= Lightfall WebGL background ==================
+         Vanilla-JS port of the React "Lightfall" component (ogl-based
+         streak/glow shader). No React and no build step here, so `ogl`
+         is loaded straight from a CDN as an ES module, and the React
+         hooks (useEffect/useRef) are replaced with a plain init function.
+         Colors are tuned to the site's rose/gold palette instead of the
+         component's original blue/purple defaults so it reads as a soft
+         glowing wash behind the page rather than a colliding backdrop —
+         change the `colors` / `backgroundColor` / `opacity` values in the
+         config object at the bottom of this script to taste. -->
+    <script type="module">
+        (async () => {
+            let ogl;
+            try {
+                ogl = await import('https://esm.sh/ogl@1.0.6');
+            } catch (err) {
+                console.warn('Lightfall background: could not load ogl from CDN, skipping effect.', err);
+                return;
+            }
+            const { Renderer, Program, Mesh, Triangle } = ogl;
+
+            const MAX_COLORS = 8;
+
+            const hexToRGB = hex => {
+                const c = hex.replace('#', '').padEnd(6, '0');
+                return [
+                    parseInt(c.slice(0, 2), 16) / 255,
+                    parseInt(c.slice(2, 4), 16) / 255,
+                    parseInt(c.slice(4, 6), 16) / 255
+                ];
+            };
+
+            const prepColors = input => {
+                const base = (input && input.length ? input : ['#A6C8FF', '#5227FF', '#FF9FFC']).slice(0, MAX_COLORS);
+                const count = base.length;
+                const arr = [];
+                for (let i = 0; i < MAX_COLORS; i++) arr.push(hexToRGB(base[Math.min(i, base.length - 1)]));
+                const avg = [0, 0, 0];
+                for (let i = 0; i < count; i++) {
+                    avg[0] += arr[i][0];
+                    avg[1] += arr[i][1];
+                    avg[2] += arr[i][2];
+                }
+                avg[0] /= count;
+                avg[1] /= count;
+                avg[2] /= count;
+                return { arr, count, avg };
+            };
+
+            const vertex = `
+attribute vec2 position;
+attribute vec2 uv;
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
+
+            const fragment = `
+precision highp float;
+
+uniform vec3  iResolution;
+uniform vec2  iMouse;
+uniform float iTime;
+
+uniform vec3  uColor0;
+uniform vec3  uColor1;
+uniform vec3  uColor2;
+uniform vec3  uColor3;
+uniform vec3  uColor4;
+uniform vec3  uColor5;
+uniform vec3  uColor6;
+uniform vec3  uColor7;
+uniform int   uColorCount;
+
+uniform vec3  uBgColor;
+uniform vec3  uMouseColor;
+uniform float uSpeed;
+uniform int   uStreakCount;
+uniform float uStreakWidth;
+uniform float uStreakLength;
+uniform float uGlow;
+uniform float uDensity;
+uniform float uTwinkle;
+uniform float uZoom;
+uniform float uBgGlow;
+uniform float uOpacity;
+uniform float uMouseEnabled;
+uniform float uMouseStrength;
+uniform float uMouseRadius;
+
+varying vec2 vUv;
+
+vec3 palette(float h) {
+  int count = uColorCount;
+  if (count < 1) count = 1;
+  int idx = int(floor(clamp(h, 0.0, 0.999999) * float(count)));
+  if (idx <= 0) return uColor0;
+  if (idx == 1) return uColor1;
+  if (idx == 2) return uColor2;
+  if (idx == 3) return uColor3;
+  if (idx == 4) return uColor4;
+  if (idx == 5) return uColor5;
+  if (idx == 6) return uColor6;
+  return uColor7;
+}
+
+vec3 tanhv(vec3 x) {
+  vec3 e = exp(-2.0 * x);
+  return (1.0 - e) / (1.0 + e);
+}
+
+vec2 sceneC(vec2 frag, vec2 r) {
+  vec2 P = (frag + frag - r) / r.x;
+  float z = 0.0;
+  float d = 1e3;
+  vec4 O = vec4(0.0);
+  for (int k = 0; k < 39; k++) {
+    if (d <= 1e-4) break;
+    O = z * normalize(vec4(P, uZoom, 0.0)) - vec4(0.0, 4.0, 1.0, 0.0) / 4.5;
+    d = 1.0 - sqrt(length(O * O));
+    z += d;
+  }
+  return vec2(O.x, atan(O.z, O.y));
+}
+
+void mainImage(out vec4 o, vec2 C) {
+  vec2 r = iResolution.xy;
+  vec2 uv0 = (C + C - r) / r.x;
+  float T = 0.1 * iTime * uSpeed + 9.0;
+  float angRings = max(1.0, floor(6.28318530718 * max(uDensity, 0.05) + 0.5));
+  vec2 Y = vec2(5e-3, 6.28318530718 / angRings);
+
+  vec2 c0 = sceneC(C, r);
+  vec2 cdx = sceneC(C + vec2(1.0, 0.0), r);
+  vec2 cdy = sceneC(C + vec2(0.0, 1.0), r);
+  vec2 dCx = cdx - c0;
+  vec2 dCy = cdy - c0;
+  dCx.y -= 6.28318530718 * floor(dCx.y / 6.28318530718 + 0.5);
+  dCy.y -= 6.28318530718 * floor(dCy.y / 6.28318530718 + 0.5);
+  vec2 fw = abs(dCx) + abs(dCy);
+  C = c0;
+
+  vec2 P = vec2(2.0, 1.0) * uv0 - (r / r.x) * vec2(0.0, 1.0);
+  vec4 O = vec4(uBgColor * 90.0 * uBgGlow / (1e3 * dot(P, P) + 6.0), 0.0);
+
+  float mGlow = 0.0;
+  if (uMouseEnabled > 0.5) {
+    vec2 mN = (iMouse + iMouse - r) / r.x;
+    float md = length(uv0 - mN);
+    mGlow = exp(-md * md / max(uMouseRadius * uMouseRadius, 1e-4)) * uMouseStrength;
+    O.rgb += uMouseColor * mGlow * 0.25;
+  }
+
+  float zr = 5e-4 * uStreakWidth;
+  vec2 rr = vec2(max(length(fw), 1e-5));
+  float tail = 19.0 / max(uStreakLength, 0.05);
+
+  for (int m = 0; m < 16; m++) {
+    if (m >= uStreakCount) break;
+    float jf = float(m) + 1.0;
+    float ic = fract(sin(dot(vec2(jf, floor(C.x / Y.x + 0.5)), vec2(7.0, 11.0)) * 73.0));
+    vec2 Pp = C - (T + T * ic) * vec2(0.0, 1.0);
+    Pp -= floor(Pp / Y + 0.5) * Y;
+    float h = fract(8663.0 * ic);
+    vec3 col = palette(h);
+    float weight = mix(1.5, 1.0 + sin(T + 7.0 * h + 4.0), uTwinkle);
+    weight *= (1.0 + mGlow * 2.0);
+    vec2 inner = vec2(length(max(Pp, vec2(-1.0, 0.0))), length(Pp) - zr) - zr;
+    vec2 sm = vec2(1.0) - smoothstep(-rr, rr, inner);
+    O.rgb += dot(sm, vec2(exp(tail * Pp.y), 3.0)) * col * weight;
+    C.x += Y.x / 8.0;
+  }
+
+  vec3 colr = sqrt(tanhv(max(O.rgb * uGlow - vec3(0.04, 0.08, 0.02), 0.0)));
+  o = vec4(colr, uOpacity);
+}
+
+void main() {
+  vec4 color;
+  mainImage(color, vUv * iResolution.xy);
+  gl_FragColor = color;
+}
+`;
+
+            function initLightfall(container, opts) {
+                const {
+                    colors = ['#A6C8FF', '#5227FF', '#FF9FFC'],
+                    backgroundColor = '#0A29FF',
+                    speed = 0.5,
+                    streakCount = 2,
+                    streakWidth = 1,
+                    streakLength = 1,
+                    glow = 1,
+                    density = 0.6,
+                    twinkle = 1,
+                    zoom = 3,
+                    backgroundGlow = 0.5,
+                    opacity = 1,
+                    mouseInteraction = true,
+                    mouseStrength = 0.5,
+                    mouseRadius = 1,
+                    mouseDampening = 0.15,
+                    dpr
+                } = opts || {};
+
+                const renderer = new Renderer({
+                    dpr: dpr ?? (window.devicePixelRatio || 1),
+                    alpha: true,
+                    antialias: true
+                });
+                const gl = renderer.gl;
+                const canvas = gl.canvas;
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                canvas.style.display = 'block';
+                container.appendChild(canvas);
+
+                const { arr, count, avg } = prepColors(colors);
+
+                const uniforms = {
+                    iResolution: { value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1] },
+                    iMouse: { value: [0, 0] },
+                    iTime: { value: 0 },
+                    uColor0: { value: arr[0] },
+                    uColor1: { value: arr[1] },
+                    uColor2: { value: arr[2] },
+                    uColor3: { value: arr[3] },
+                    uColor4: { value: arr[4] },
+                    uColor5: { value: arr[5] },
+                    uColor6: { value: arr[6] },
+                    uColor7: { value: arr[7] },
+                    uColorCount: { value: count },
+                    uBgColor: { value: hexToRGB(backgroundColor) },
+                    uMouseColor: { value: avg },
+                    uSpeed: { value: speed },
+                    uStreakCount: { value: Math.max(1, Math.min(16, Math.round(streakCount))) },
+                    uStreakWidth: { value: streakWidth },
+                    uStreakLength: { value: streakLength },
+                    uGlow: { value: glow },
+                    uDensity: { value: density },
+                    uTwinkle: { value: twinkle },
+                    uZoom: { value: zoom },
+                    uBgGlow: { value: backgroundGlow },
+                    uOpacity: { value: opacity },
+                    uMouseEnabled: { value: mouseInteraction ? 1 : 0 },
+                    uMouseStrength: { value: mouseStrength },
+                    uMouseRadius: { value: mouseRadius }
+                };
+
+                const program = new Program(gl, { vertex, fragment, uniforms });
+                const geometry = new Triangle(gl);
+                const mesh = new Mesh(gl, { geometry, program });
+
+                const resize = () => {
+                    const rect = container.getBoundingClientRect();
+                    renderer.setSize(rect.width, rect.height);
+                    uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
+                };
+                resize();
+                new ResizeObserver(resize).observe(container);
+
+                const mouseTarget = [0, 0];
+                let lastTime = 0;
+
+                // Background layer: listen on window (not canvas) and keep the
+                // container pointer-events:none so the effect never blocks clicks
+                // on the real page content sitting above it.
+                if (mouseInteraction) {
+                    window.addEventListener('pointermove', e => {
+                        const rect = canvas.getBoundingClientRect();
+                        const scale = renderer.dpr || 1;
+                        mouseTarget[0] = (e.clientX - rect.left) * scale;
+                        mouseTarget[1] = (rect.height - (e.clientY - rect.top)) * scale;
+                        if (mouseDampening <= 0) {
+                            uniforms.iMouse.value = [mouseTarget[0], mouseTarget[1]];
+                        }
+                    }, { passive: true });
+                }
+
+                function loop(t) {
+                    requestAnimationFrame(loop);
+                    uniforms.iTime.value = t * 0.001;
+                    if (mouseDampening > 0) {
+                        if (!lastTime) lastTime = t;
+                        const dt = (t - lastTime) / 1000;
+                        lastTime = t;
+                        const tau = Math.max(1e-4, mouseDampening);
+                        let factor = 1 - Math.exp(-dt / tau);
+                        if (factor > 1) factor = 1;
+                        const cur = uniforms.iMouse.value;
+                        cur[0] += (mouseTarget[0] - cur[0]) * factor;
+                        cur[1] += (mouseTarget[1] - cur[1]) * factor;
+                    } else {
+                        lastTime = t;
+                    }
+                    try {
+                        renderer.render({ scene: mesh });
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+                requestAnimationFrame(loop);
+            }
+
+            // ---- config: tuned to the site's rose/gold palette, kept subtle
+            // (opacity 0.5) so it reads as an ambient glow behind the cards
+            // instead of a solid colored backdrop. Tweak freely.
+            initLightfall(document.getElementById('lightfall-bg'), {
+                colors: ['#FFB6C9', '#FF6F91', '#E8B84B'],
+                backgroundColor: '#3A0F22',
+                speed: 0.4,
+                streakCount: 3,
+                streakWidth: 1,
+                streakLength: 1.1,
+                glow: 0.9,
+                density: 0.5,
+                twinkle: 1,
+                zoom: 3,
+                backgroundGlow: 0.35,
+                opacity: 0.5,
+                mouseInteraction: true,
+                mouseStrength: 0.35,
+                mouseRadius: 1.1,
+                mouseDampening: 0.18
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
