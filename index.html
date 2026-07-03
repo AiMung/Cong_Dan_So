@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công Dân Số – Xuân Hương, Đà Lạt</title>
+    <title>Công Dân Số – Phường Xuân Hương – Đà Lạt</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap"
         rel="stylesheet">
@@ -14,17 +14,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
-            --rose: #FF6F91;
-            --rose-deep: #E6486C;
-            --rose-soft: #FFB6C9;
-            --blossom: #FFE3EC;
-            --gold: #E8B84B;
-            --gold-deep: #B9852A;
-            --sky: #EAF4FB;
-            --cream: #FFFBF6;
-            --ink: #3A2233;
-            --plum: #6B4A5F;
-            --line: #F3D3DE;
+            --rose: #00F2FE;
+            --rose-deep: #0072FF;
+            --rose-soft: #00FF87;
+            --blossom: #0d1b3e;
+            --gold: #FFD700;
+            --gold-deep: #D4AF37;
+            --sky: #E3F2FD;
+            --cream: #081026;
+            --ink: #FFFFFF;
+            --plum: #8FA0BC;
+            --line: rgba(0, 242, 254, 0.25);
         }
 
         * {
@@ -39,9 +39,9 @@
 
         body {
             background:
-                radial-gradient(900px 420px at 10% -8%, rgba(255, 111, 145, .16), transparent 60%),
-                radial-gradient(800px 380px at 100% 0%, rgba(232, 184, 75, .14), transparent 55%),
-                #FBE9EE;
+                radial-gradient(1000px 500px at 10% -10%, rgba(0, 242, 254, .15), transparent 60%),
+                radial-gradient(900px 450px at 90% 10%, rgba(0, 255, 135, .1), transparent 55%),
+                #04091a;
             font-family: 'Be Vietnam Pro', sans-serif;
             color: var(--ink);
             min-height: 100vh;
@@ -85,7 +85,7 @@
             animation-name: fall;
             animation-timing-function: linear;
             animation-iteration-count: 1;
-            filter: drop-shadow(0 3px 4px rgba(230, 72, 108, .22));
+            filter: drop-shadow(0 3px 6px rgba(0, 242, 254, .4));
             will-change: transform, opacity;
         }
 
@@ -144,12 +144,12 @@
             border-radius: 26px;
             text-align: center;
             border: 1px solid var(--line);
-            box-shadow: 0 30px 60px -32px rgba(230, 72, 108, .35);
+            box-shadow: 0 30px 60px -32px rgba(0, 242, 254, .45);
             overflow: hidden;
             animation-delay: .05s;
         }
 
-        /* ---------- hero banner image (now fills the whole band; text sits on top) ---------- */
+        /* ---------- hero banner image ---------- */
         .hero-banner-frame {
             position: relative;
             width: 100%;
@@ -171,7 +171,7 @@
             object-fit: cover;
             object-position: center;
             display: block;
-            filter: saturate(1.05) contrast(1.02);
+            filter: saturate(1.05) contrast(1.02) brightness(0.85);
         }
 
         .hero-overlay {
@@ -179,8 +179,8 @@
             inset: 0;
             z-index: 1;
             background:
-                linear-gradient(180deg, rgba(38, 10, 22, .68) 0%, rgba(38, 10, 22, .32) 40%, rgba(38, 10, 22, .78) 100%),
-                radial-gradient(120% 90% at 50% 0%, rgba(255, 111, 145, .2), transparent 60%);
+                linear-gradient(180deg, rgba(4, 9, 26, 0.72) 0%, rgba(4, 9, 26, 0.35) 40%, rgba(4, 9, 26, 0.85) 100%),
+                radial-gradient(120% 90% at 50% 0%, rgba(0, 242, 254, .25), transparent 60%);
             pointer-events: none;
         }
 
@@ -189,7 +189,7 @@
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .15);
             pointer-events: none;
             z-index: 3;
         }
@@ -218,7 +218,8 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: var(--gold);
+            background: var(--rose-soft);
+            box-shadow: 0 0 8px var(--rose-soft);
         }
 
         .eyebrow {
@@ -227,8 +228,8 @@
             font-weight: 700;
             letter-spacing: .16em;
             text-transform: uppercase;
-            color: #FFE3EC;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+            color: var(--rose);
+            text-shadow: 0 0 8px rgba(0, 242, 254, .6);
         }
 
         .hero-band h1 {
@@ -238,17 +239,18 @@
             line-height: 1.05;
             margin: 0 0 6px;
             color: #fff;
-            text-shadow: 0 6px 28px rgba(0, 0, 0, .45), 0 1px 4px rgba(0, 0, 0, .35);
+            text-shadow: 0 6px 28px rgba(0, 0, 0, .6), 0 1px 4px rgba(0, 0, 0, .4);
             position: relative;
         }
 
         .hero-band h1 em {
             font-style: italic;
             font-weight: 700;
-            background: linear-gradient(120deg, #FFD9E4, #F5C868);
+            background: linear-gradient(120deg, var(--rose-soft), var(--rose), var(--gold));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
         .hero-band .place {
@@ -256,8 +258,8 @@
             font-style: italic;
             font-weight: 600;
             font-size: clamp(15px, 2.2vw, 18px);
-            color: #FFE9C7;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+            color: var(--sky);
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .5);
             margin: 0 0 16px;
         }
 
@@ -266,8 +268,8 @@
             margin: 0 auto;
             font-size: 13.8px;
             line-height: 1.7;
-            color: rgba(255, 255, 255, .88);
-            text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
+            color: rgba(255, 255, 255, .9);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, .5);
             position: relative;
         }
 
@@ -286,13 +288,14 @@
             gap: 7px;
             font-size: 11.5px;
             color: #fff;
-            font-weight: 700;
-            background: rgba(255, 255, 255, .14);
-            border: 1px solid rgba(255, 255, 255, .38);
+            font-weight: 600;
+            background: rgba(10, 25, 47, .65);
+            border: 1px solid rgba(0, 242, 254, .35);
             padding: 6px 12px;
             border-radius: 999px;
             backdrop-filter: blur(10px) saturate(140%);
             -webkit-backdrop-filter: blur(10px) saturate(140%);
+            box-shadow: 0 4px 12px rgba(0, 242, 254, 0.15);
         }
 
         .seal-item svg {
@@ -322,7 +325,7 @@
             border-radius: 22px;
             padding: 3px 0 26px;
             text-align: center;
-            box-shadow: 0 1px 2px rgba(58, 34, 51, .04), 0 22px 44px -28px rgba(230, 72, 108, .45);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 22px 44px -28px rgba(0, 242, 254, .35);
             transition: transform .25s ease, box-shadow .25s ease;
             overflow: hidden;
             isolation: isolate;
@@ -330,11 +333,9 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 1px 2px rgba(58, 34, 51, .05), 0 30px 54px -26px rgba(230, 72, 108, .55);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 30px 54px -26px rgba(0, 255, 135, .45);
         }
 
-        /* rotating gradient ring: an oversized conic-gradient square spins behind
-           the card, and ::after masks everything but a thin border-width ring */
         .card::before {
             content: '';
             position: absolute;
@@ -358,7 +359,7 @@
             position: absolute;
             inset: 2.5px;
             border-radius: 19px;
-            background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%);
+            background: linear-gradient(180deg, rgba(16, 28, 54, 0.95) 0%, var(--cream) 100%);
             z-index: 1;
         }
 
@@ -384,9 +385,9 @@
             padding: 6px 14px;
             border-radius: 999px;
             margin: 22px 0 18px;
-            color: #fff;
-            background: linear-gradient(120deg, var(--rose), var(--rose-deep));
-            box-shadow: 0 6px 14px -6px rgba(230, 72, 108, .55);
+            color: #04091a;
+            background: linear-gradient(120deg, var(--rose), var(--rose-soft));
+            box-shadow: 0 6px 14px -6px rgba(0, 242, 254, .55);
         }
 
         .qr-frame {
@@ -413,7 +414,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            border: 2.5px solid var(--rose-deep);
+            border: 2.5px solid var(--rose);
         }
 
         .qr-frame .bracket.tl {
@@ -462,7 +463,7 @@
             margin: 0 0 20px;
         }
 
-        /* ---------- store badges (App Store / Google Play) ---------- */
+        /* ---------- store badges ---------- */
         .store-badge {
             display: flex;
             align-items: center;
@@ -474,13 +475,12 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #121218 0%, #252530 40%, #3e3e4f 50%, #252530 60%, #121218 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 50%, #1e293b 60%, #0f172a 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.1);
             transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Sword-like periodic flash sheen style (every 5 seconds) */
         .store-badge .sheen {
             position: absolute;
             top: 0;
@@ -489,9 +489,9 @@
             height: 100%;
             background: linear-gradient(90deg,
                     transparent 0%,
-                    rgba(255, 255, 255, 0.7) 45%,
+                    rgba(255, 255, 255, 0.75) 45%,
                     rgba(255, 255, 255, 0.95) 50%,
-                    rgba(255, 255, 255, 0.7) 55%,
+                    rgba(255, 255, 255, 0.75) 55%,
                     transparent 100%);
             transform: skewX(-30deg);
             z-index: 3;
@@ -516,17 +516,18 @@
         /* Hover states */
         .store-badge:hover {
             transform: translateY(-4px) scale(1.02);
-            background: linear-gradient(135deg, #181822 0%, #2c2c3a 40%, #4f4f65 50%, #2c2c3a 60%, #181822 100%);
-            border-color: rgba(255, 111, 145, 0.35);
+            background: linear-gradient(135deg, #131e35 0%, #203156 40%, #374f88 50%, #203156 60%, #131e35 100%);
         }
 
         /* Glow shadows on hover matching platform style */
         .card:nth-of-type(1) .store-badge:hover {
-            box-shadow: 0 10px 25px rgba(230, 72, 108, 0.45);
+            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.45);
+            border-color: rgba(0, 242, 254, 0.5);
         }
 
         .card:nth-of-type(2) .store-badge:hover {
-            box-shadow: 0 10px 25px rgba(232, 184, 75, 0.35);
+            box-shadow: 0 10px 25px rgba(0, 255, 135, 0.35);
+            border-color: rgba(0, 255, 135, 0.5);
         }
 
         /* Squeeze state on click */
@@ -585,7 +586,7 @@
         }
 
         .footnote b {
-            color: var(--rose-deep);
+            color: var(--rose-soft);
         }
 
         .sakura-divider {
@@ -599,11 +600,11 @@
         .sakura-divider .ln {
             width: 70px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--rose-soft));
+            background: linear-gradient(90deg, transparent, var(--rose));
         }
 
         .sakura-divider .ln.r {
-            background: linear-gradient(90deg, var(--rose-soft), transparent);
+            background: linear-gradient(90deg, var(--rose), transparent);
         }
 
         .sakura-divider span.cap {
@@ -611,7 +612,7 @@
             font-size: 10px;
             letter-spacing: .14em;
             text-transform: uppercase;
-            color: var(--rose-deep);
+            color: var(--rose-soft);
         }
 
         .bottom-pad {
@@ -758,18 +759,18 @@
         new QRCode(document.getElementById("qr-ios"), {
             text: encodeURI("https://apps.apple.com/vn/app/công-dân-số-xuân-hương-đà-lạt/id1623774708?l=vi"),
             width: 148, height: 148,
-            colorDark: "#3A2233", colorLight: "#ffffff",
+            colorDark: "#04091a", colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.M
         });
         new QRCode(document.getElementById("qr-android"), {
             text: encodeURI("https://play.google.com/store/apps/details?id=vn.vnpt.xuanhuongtructuyen&hl=vi"),
             width: 148, height: 148,
-            colorDark: "#3A2233", colorLight: "#ffffff",
+            colorDark: "#04091a", colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.M
         });
 
-        /* ---------- falling sakura petals ---------- */
-        const petalColors = ['#FF6F91', '#FFB6C9', '#E6486C', '#FFD9E4'];
+        /* ---------- falling cyber sparks ---------- */
+        const petalColors = ['#00F2FE', '#00FF87', '#0072FF', '#00E676'];
         const petalHost = document.getElementById('petals');
         const PETAL_PATH = 'M16 2C10 2 6 8 6 15c0 6.5 4.2 12 10 17 5.8-5 10-10.5 10-17 0-7-4-13-10-13z';
 
@@ -1113,25 +1114,23 @@ void main() {
                 requestAnimationFrame(loop);
             }
 
-            // ---- config: tuned to the site's rose/gold palette, kept subtle
-            // (opacity 0.5) so it reads as an ambient glow behind the cards
-            // instead of a solid colored backdrop. Tweak freely.
+            // ---- config: tuned to the site's digital blue/green palette
             initLightfall(document.getElementById('lightfall-bg'), {
-                colors: ['#FFB6C9', '#FF6F91', '#E8B84B'],
-                backgroundColor: '#3A0F22',
-                speed: 0.4,
+                colors: ['#00F2FE', '#00FF87', '#0072FF'],
+                backgroundColor: '#04091a',
+                speed: 0.35,
                 streakCount: 3,
-                streakWidth: 1,
-                streakLength: 1.1,
-                glow: 0.9,
-                density: 0.5,
+                streakWidth: 1.1,
+                streakLength: 1.2,
+                glow: 1.0,
+                density: 0.6,
                 twinkle: 1,
-                zoom: 3,
-                backgroundGlow: 0.35,
-                opacity: 0.5,
+                zoom: 2.8,
+                backgroundGlow: 0.4,
+                opacity: 0.65,
                 mouseInteraction: true,
-                mouseStrength: 0.35,
-                mouseRadius: 1.1,
+                mouseStrength: 0.4,
+                mouseRadius: 1.2,
                 mouseDampening: 0.18
             });
         })();
